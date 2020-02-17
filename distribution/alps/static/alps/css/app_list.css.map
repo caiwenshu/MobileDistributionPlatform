@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AACA,IAAI;EACF,aAAa,EAAE,IAAI;;AAErB,SAAS;EACP,aAAa,EAAE,IAAI",
+"sources": ["app_list.sass"],
+"names": [],
+"file": "app_list.css"
+}

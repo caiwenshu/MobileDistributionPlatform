@@ -1,0 +1,13 @@
+lint
+*.pyc
+dist
+MANIFEST
+files/
+migrations/
+.DS_Store
+*.egg*
+distribution/static/
+distribution/logs/
+distribution/*.log
+db.sqlite3
+.idea

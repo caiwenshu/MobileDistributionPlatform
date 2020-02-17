@@ -1,0 +1,132 @@
+{% extends "alps/base.html" %}
+{% load i18n staticfiles %}
+
+{% block title %}{% trans "App安装页面" %}{% endblock %}
+
+{% block extra_head %}
+    <link rel="stylesheet" href="{% static 'alps/css/app_list.css' %}">
+{% endblock %}
+
+
+{% block extra_script %}
+<script language="javascript" type="text/javascript">
+
+$(function() {
+
+  var qrcode = new QRCode(document.getElementById("qrcode"), {
+    width : 150,
+    height : 150
+  });
+
+  qrcode.clear(); // clear the code.
+
+  qrcode.makeCode("{{appInfo.get_qrcode_url}}");
+  // qrcode.makeCode("{% url 'alps:preview_app' app_id=appInfo.uuid %}");
+
+  // {% if platform == ios_identifier %}
+  //
+  //     qrcode.makeCode("itms-services:///?action=download-manifest&url={{appInfo.get_plist_url}}");
+  //
+  // {% else %}
+  //
+  //     qrcode.makeCode("{% url 'alps:preview_app' app_id=appInfo.uuid %}");
+  //
+  // {% endif %}
+
+
+})
+
+</script>
+{% endblock %}
+
+
+
+{% block content %}
+
+    <div class="row">
+        <div class="small-12 text-right columns">
+        </div>
+    </div>
+
+        <div class="app">
+            <div class="row">
+                <div class="small-12  columns">
+                    <h2>{{ appInfo.name }}</h2>
+                </div>
+            </div>
+
+            <div class="row panel">
+                <div class="row">
+
+                    <div class="small-12 medium-3 columns app_info">
+                        <strong>{% trans '操作系统' %}:</strong>
+                        <br />
+                        {{ platform }}
+                    </div>
+
+                    <div class="small-12 medium-2 columns app_info">
+                        <strong>{% trans '版本' %}:</strong>
+                        <br />
+                        {{ appInfo.serverVersion }}
+                    </div>
+
+                    <div class="small-12 medium-4 columns app_info">
+                        <strong>{% trans '上传时间' %}:</strong>
+                        <br />
+                        {{ appInfo.createTime|date:"Y-m-d H:i" }}
+                    </div>
+
+                    <div class="small-12 medium-3 columns app_info">
+                        <strong>{% trans '升级内容' %}:</strong>
+                        <br />
+                        {{ appInfo.serviceUpdateMsg }}
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="small-12 medium-3 columns app_info">
+                        <strong>{% trans '唯一标识' %}:</strong>
+                        <br />
+                        {{ appInfo.bundle_identifier }}
+                    </div>
+
+                    <div class="small-12 medium-2 columns app_info">
+                        <strong>{% trans '大小' %}:</strong>
+                        <br />
+                        {{ appInfo.size }}
+                    </div>
+
+                    <div class="small-12 medium-4 columns app_info">
+                    </div>
+
+                </div>
+
+                <div class="row">
+                  <div id="qrcode" style="width:160px; height:160px; margin-top:15px; margin-left:15px;" class="  app_info">
+
+                  </div>
+                </div>
+
+                <div class="row collapse">
+                    <div class="small-12 columns">
+                        {% if platform == ios_identifier %}
+                            <a class="button expand" href="itms-services://?action=download-manifest&url={{appInfo.get_plist_url}}">
+                              <!-- <a class="button expand" href="itms-services:///?action=download-manifest&url=http://192.168.21.213:8000/dealers/plist/1.plist"> -->
+                                {% trans '安 装' %}
+                            </a>
+                        {% else %}
+
+                        <a class="button expand" href="{{appInfo.get_binary_url}}">
+                            {% trans '安 装' %}
+                        </a>
+
+                            <!-- <a class="button expand" href="{% url 'alps:send_apk' app_id=appInfo.uuid %}">
+                                {% trans '安 装' %}
+                            </a> -->
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+{% endblock %}

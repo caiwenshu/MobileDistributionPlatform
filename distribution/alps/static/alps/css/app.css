@@ -1,0 +1,13 @@
+/*
+a {
+    color: black;
+}
+
+button, .button {
+    background-color: black;
+}
+
+button:hover, button:focus, .button:hover, .button:focus {
+    background-color: gray;
+}
+*/

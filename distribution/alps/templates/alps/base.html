@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+{% load i18n staticfiles %}
+<html>
+<head>
+    <title>{% block title %}{% trans "Mobile App Distribution" %}{% endblock %}</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="{% static 'alps/css/foundation.min.css' %}">
+    <script src="{% static 'alps/js/vendor/modernizr.js' %}"></script>
+
+    <script src="{% static 'alps/js/vendor/jquery.js' %}"></script>
+    <script src="{% static 'alps/js/qrcode.js' %}"></script>
+    <script src="{% static 'alps/js/foundation/foundation.min.js' %}"></script>
+    
+    {% block extra_style %}{% endblock %}
+    {% block extra_script %}{% endblock %}
+    {% block extra_head %}{% endblock %}
+    <link rel="stylesheet" href="{% static 'alps/css/app.css' %}">
+
+
+    <script>
+        $(document).foundation();
+    </script>
+</head>
+<body>
+{% block content %}{% endblock %}
+
+</body>
+</html>
