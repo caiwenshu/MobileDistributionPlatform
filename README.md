@@ -15,6 +15,10 @@
 
 3. 登录账号密码: admin / caiwenshu
 
+4. 前端页面配置: https://github.com/caiwenshu/mdp_frontend
+
+5. 下载页配置: https://github.com/caiwenshu/mdp_download
+
 ##使用截图
   
   
