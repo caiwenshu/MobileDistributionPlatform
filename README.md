@@ -35,7 +35,13 @@
  ![img](./intro/admin_download.png)
  
  ![img](./intro/admin_fileupload.png)
-    
+
+
+##流程图
+
+![img](./intro/流程图.png)
+
+
 ##安装
 
 
