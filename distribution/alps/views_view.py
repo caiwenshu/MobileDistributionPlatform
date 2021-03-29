@@ -259,8 +259,8 @@ class AppDownloadPageSearchApiView(APIView):
         page_size = 2
         jira_version = ""
 
-        if not 'applicationId' in request.data:
-            raise APIException('request.data missing key "applicationId"')
+        if not 'groupType' in request.data:
+            raise APIException('request.data missing key "groupType"')
 
         if 'pageNo' in request.data:
             page_no = int(request.data["pageNo"])
@@ -268,8 +268,8 @@ class AppDownloadPageSearchApiView(APIView):
         if 'pageSize' in request.data:
             page_size = int(request.data["pageSize"])
 
-        if 'applicationId' in request.data:
-            application_id = request.data["applicationId"]
+        if 'groupType' in request.data:
+            group_type = request.data["groupType"]
 
         # application_id = "e68ba672-4dc0-4031-a49a-e77fa7155dee"
         # application_id = "e68ba672-4dc0-4031-a49a-e77fa7155dee"
@@ -278,11 +278,9 @@ class AppDownloadPageSearchApiView(APIView):
 
         sql_page_no = page_no * page_size
         sql_page_size = (page_no + 1) * page_size
-        applications = MobileApplication.objects.filter(uuid=application_id)
-
-        if len(applications) > 0:
-            application = applications.first()
-            mobile_application_group = application.mobile_application_group
+        groups = MobileApplicationGroup.objects.filter(type=group_type)
+        if len(groups) > 0:
+            mobile_application_group = groups.first()
             count = DownloadPageConfiguration.objects.filter(mobile_application_group=mobile_application_group).count()
 
             apps = DownloadPageConfiguration.objects.filter(mobile_application_group=mobile_application_group).order_by(
@@ -297,7 +295,6 @@ class AppDownloadPageSearchApiView(APIView):
 
             return_data = {"group_name": group_name,
                            "group_type": group_type,
-                           "platform": application.platform,
                            "pages": app_info_serializer
                            }
 
@@ -332,8 +329,8 @@ class AppEmailConfigSearchApiView(APIView):
         page_size = 2
         jira_version = ""
 
-        if not 'applicationId' in request.data:
-            raise APIException('request.data missing key "applicationId"')
+        if not 'groupType' in request.data:
+            raise APIException('request.data missing key "groupType"')
 
         if 'pageNo' in request.data:
             page_no = int(request.data["pageNo"])
@@ -341,8 +338,8 @@ class AppEmailConfigSearchApiView(APIView):
         if 'pageSize' in request.data:
             page_size = int(request.data["pageSize"])
 
-        if 'applicationId' in request.data:
-            application_id = request.data["applicationId"]
+        if 'groupType' in request.data:
+            group_type = request.data["groupType"]
 
         # application_id = "e68ba672-4dc0-4031-a49a-e77fa7155dee"
         # application_id = "e68ba672-4dc0-4031-a49a-e77fa7155dee"
@@ -351,11 +348,10 @@ class AppEmailConfigSearchApiView(APIView):
 
         sql_page_no = page_no * page_size
         sql_page_size = (page_no + 1) * page_size
-        applications = MobileApplication.objects.filter(uuid=application_id)
+        groups = MobileApplicationGroup.objects.filter(type=group_type)
 
-        if len(applications) > 0:
-            application = applications.first()
-            mobile_application_group = application.mobile_application_group
+        if len(groups) > 0:
+            mobile_application_group = groups.first()
 
             count = EmailConfiguration.objects.filter(mobile_application_group=mobile_application_group).count()
 
@@ -371,7 +367,6 @@ class AppEmailConfigSearchApiView(APIView):
 
             return_data = {"group_name": group_name,
                            "group_type": group_type,
-                           "platform": application.platform,
                            "emails": app_info_serializer
                            }
 

@@ -25,7 +25,7 @@ class EmailThread(threading.Thread):
         message = EmailMessage('alps/send_email_temple.tpl',
                                {'appQRCodeURL': self.qrcode_url,
                                 'appInfo': self.app_info,
-                                'platform': self.platform}, 'mmpt@cwens.com',
+                                'platform': self.platform}, 'wenshu.cai@cwens.com',
                                to=self.recipient_list)
         message.send()
         logger.info("邮件发送成功")

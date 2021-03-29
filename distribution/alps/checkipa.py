@@ -720,11 +720,24 @@ class ParseIPA(object):
         # payload/.+?\.app/AppIcon60x60@3x.png$
 
         filenames = zip_obj.namelist()
-        filename = ''
+        icon_filename = ''
         for fname in filenames:
             if regx.search(fname):
-                filename = fname
+                icon_filename = fname
                 break
+
+        # canot found 3x icon ,to find 2x.png
+        if icon_filename == '':
+            print 'to find 2x icon..'
+            app_icon_name = filename + "@2x.png"
+            print app_icon_name
+            rx = "Payload/.+?\.app/%s$" % app_icon_name
+            print rx
+            regx = re.compile(r'' + rx + '')
+            for fname in filenames:
+                if regx.search(fname):
+                    filename = fname
+                    break
 
         self.clear_icon_temp_file()
 
