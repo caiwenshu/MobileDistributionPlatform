@@ -28,7 +28,7 @@ SECRET_KEY = 'qt!u+ifv1g)*bp5%xb^v8rw^np3#lcg1v$()4=s(bsm+mc$yk7'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["127.0.0.1", "192.168.0.105", "localhost"]
+ALLOWED_HOSTS = ["127.0.0.1", "192.168.0.105", "161.189.61.28", "mdp.yeego.com", "localhost"]
 
 SITE_ID = 1
 # Application definition
