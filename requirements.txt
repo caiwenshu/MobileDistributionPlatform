@@ -1,7 +1,7 @@
 Django==1.10.5
 django-mail-templated==2.6.5
 djangorestframework==3.5.3
-Pillow==5.3.0
+Pillow==9.0.0
 pngdefry==0.4
 qrcode==6.0
 requests==2.20.1
